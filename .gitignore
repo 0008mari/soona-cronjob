@@ -1,1 +1,6 @@
 secrets.py
+*.pyc
+__pycache___/
+example.java
+lambda/
+libs/

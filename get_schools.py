@@ -1,11 +1,14 @@
+# -*- coding: utf-8 -*-
 import mysql.connector
-from secrets import *
-from secrets import HOST
-from secrets import USER
-from secrets import PASSWORD
-from secrets import DATABASE;
+from secret import *
+from secret import HOST
+from secret import USER
+from secret import PASSWORD
+from secret import DATABASE
 
 def get_schools():
+    # input: none
+    # output: list of tuples
     mydb = mysql.connector.connect(
         host=HOST,
         user=USER,
@@ -14,10 +17,11 @@ def get_schools():
     )
 
     cur = mydb.cursor()
-    cur.execute("SELECT C.*, S.tchr_id FROM school C INNER JOIN student S ON S.sch_id = C.sch_id")
+    cur.execute("SELECT C.*, S.tchr_id, S.stu_id, S.stu_name FROM school C INNER JOIN student S ON S.sch_id = C.sch_id")
     myresult = cur.fetchall()
-    for x in myresult:
-        print(x)
 
     cur.close()
     mydb.close()
+    
+    return myresult
+
